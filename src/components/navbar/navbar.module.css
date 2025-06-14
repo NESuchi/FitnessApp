@@ -1,0 +1,39 @@
+.Wrapper {
+    background-color: var(--bgSecondary);
+    min-height: 152px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 80px;
+}
+
+.Navbar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 1440px;
+}
+
+.Img {
+    flex: 1;
+}
+
+.Navigation {
+    flex: 4;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    font-size: large;
+    font-weight: 500;
+}
+
+a:hover {
+    font-weight: bold;
+}
+
+.Login {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
