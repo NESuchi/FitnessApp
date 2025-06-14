@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
 :root{
-    --bg: #2f884b;
-    --bgSoft: #20b425;
+    --bg: #ffffff;
+    --bgSecondary: #42B74E;
     --text: white;
-    --textSoft: #d2d4d9;
+    --textSecondary: #333539;
 }
 
 *{
