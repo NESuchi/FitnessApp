@@ -1,0 +1,25 @@
+.ScrollButton {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  background-color: var(--bgSecondary);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  border: none;
+  box-shadow: 0 8px 16px rgba(39, 104, 13, 0.5);
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.ScrollButton.Visible {
+    opacity: 0.7;
+    pointer-events: auto;
+}
+
+.ScrollButton:hover {
+    opacity: 1;
+    transition: transform 0.3s ease;
+}

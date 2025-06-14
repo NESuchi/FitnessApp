@@ -30,6 +30,8 @@ a:hover {
 
 p { 
   color: var(--text);
+  font-family: "Raleway", sans-serif;
+  font-size: 20px;
 }
 
 h1 {
@@ -38,6 +40,8 @@ h1 {
 
 h2{
   color: var(--text);
+  font-family: "Raleway", sans-serif;
+  font-size: 35px;
 }
 
 h3 {

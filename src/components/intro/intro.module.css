@@ -1,0 +1,77 @@
+.Wrapper {
+    min-height: 850px;
+    max-width: 1433px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.ContentWrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0em 8em;
+}
+
+.Content {
+    background-color: var(--bgSecondary);
+    border-radius: 18px;
+    width: 435px;
+    padding: 2em;
+    display: grid;
+    gap: 25px;
+    box-shadow: 0 8px 16px rgba(39, 104, 13, 0.5);
+}
+
+.Content p {
+    line-height: 1.3;
+}
+
+.ImgWrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.Img {
+    position: absolute;
+    object-fit: cover;
+    height: auto;
+    will-change: transform;
+}
+
+.Img.High {
+    max-width: 400px;
+    height: 300px;
+    right: 24.5%;
+    top: 5%;
+    z-index: 2;
+    aspect-ratio: 4/3;
+}
+
+.Img.Center {
+    max-width: 250px;
+    height: 420px;
+    right: 35%;
+    top: 45%;
+    z-index: 3;
+    aspect-ratio: 3/4;
+}
+
+.Img.Low {
+    max-width: 420px;
+    height: 420px;
+    right: 2%;
+    top: 44.8%;
+    z-index: 1;
+    aspect-ratio: 1/1;
+}
+
+
+
+
+
