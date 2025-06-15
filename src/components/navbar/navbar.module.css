@@ -27,10 +27,6 @@
     font-weight: 500;
 }
 
-a:hover {
-    font-weight: bold;
-}
-
 .Login {
     flex: 1;
     display: flex;

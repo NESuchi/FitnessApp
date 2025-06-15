@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root{
-    --bg: #ffffff;
+    --bg: #e8ffea;
     --bgSecondary: #42B74E;
     --text: white;
     --textSecondary: #333539;
@@ -22,10 +22,12 @@ a {
   font-family: "Raleway", sans-serif;
   color: inherit;
   text-decoration: none;
+  transition: opacity 0.2s ease;
 }
 
 a:hover {
   cursor: pointer;
+  opacity: 0.8;
 }
 
 p { 
@@ -46,5 +48,11 @@ h2{
 
 h3 {
  color: var(--text);
+}
+
+h4 {
+  font-family: "Raleway", sans-serif;
+  color: var(--text);
+  font-size: 22px;
 }
 
