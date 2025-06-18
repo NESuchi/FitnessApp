@@ -42,6 +42,7 @@
     object-fit: cover;
     height: auto;
     will-change: transform;
+    border-radius: 18px;
 }
 
 .Img.High {
