@@ -1,20 +1,22 @@
 import { useState } from "react";
 
 const Form = ({ schema, initialValues, onSubmit }) => {
-    const [formData, setFormData] = useState(initialValues);
+    const [formData, setFormData] = useState(initialValues); //Initial Values aus den Configs
 
+    // Wird bei jeder Änderung in einem Feld des Formulars ausgelöst um Zustände zu handlen
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
+        // Zustände aktualisieren
         setFormData({
-            ...formData,
-            [name]: type === 'checkbox' ? checked : value,
+            ...formData, // Alle bisherigen Objekte Kopieren, für Felder die nicht geändert zu erhalten
+            [name]: type === 'checkbox' ? checked : value, // Überprüfung auf checkbox
         });
     };
-
+    // Ausführung wenn Formular gesendet wird
     const handleSubmit = (e) => {
         e.preventDefault();
-        onSubmit(formData);
-        setFormData(initialValues);
+        onSubmit(formData); // Ruft Funktion die über prop mitgegeben wurde auf und gibt formData weiter
+        setFormData(initialValues); // setzt das Formular au die Initialvalues zurück
     }
 
     return (

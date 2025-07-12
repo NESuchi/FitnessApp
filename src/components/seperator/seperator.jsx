@@ -4,12 +4,14 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react';
 
 const Seperator = ({ titel, text, img }) => {
+    // useRef Hook um auf Eigenschaften und Methoden eines DOM-Elements zuzugreifen
     const ref = useRef(null);
+    // useScroll um den Scrollfortschritt mit hilfe von useRef zu überwachen
     const { scrollYProgress } = useScroll({
         target: ref,
         offset: ['start end', 'end start'],
     });
-
+    // useTransform um Wertebereich des MotionValue zu verändern -> Parallax-Effekt
     const bgY = useTransform(scrollYProgress, [0, 1], ['-20%', '20%']);
     const contentY = useTransform(scrollYProgress, [0, 1], [200, -200]);
 

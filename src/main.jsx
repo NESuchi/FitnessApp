@@ -18,8 +18,10 @@ import Login from './pages/Login.jsx'
 import { Provider } from 'react-redux'
 import store from './reducer/store.js'
 
+// Routing konfigurieren
 const router = createBrowserRouter([
   {
+    // Gruppierung für Haupt App
     path:"/",
     element:<App />,
     children:[
@@ -57,6 +59,7 @@ const router = createBrowserRouter([
       },
     ]
   },
+  // Gruppierung für Seiten die nicht im App Layout angezegt werden sollen
   {
     path:"/login",
     element:<Login />

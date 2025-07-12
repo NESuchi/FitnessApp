@@ -25,7 +25,7 @@ export const deleteFood = createAsyncThunk('/foods/deleteFood', async (foodId) =
     return res.data;
 });
 
-// Slice erstellen ("unterberich" des stores) der den reducer, ActionCreators und ActionTypes erstellt
+// Slice erstellen ("unterbereich" des stores) der den reducer, ActionCreators und ActionTypes erstellt
 const foodSlice = createSlice({ 
     name: 'foods',
     // Initialwerte wenn die App gestartet wird

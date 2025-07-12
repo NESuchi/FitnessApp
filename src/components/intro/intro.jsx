@@ -4,12 +4,14 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 
 const Intro = ({ titel, text, imgHigh, imgCenter, imgLow }) => {
+    // useRef Hook um auf Eigenschaften und Methoden eines DOM-Elements zuzugreifen    
     const ref = useRef(null);
+    // useScroll um den Scrollfortschritt mit hilfe von useRef zu überwachen
     const { scrollYProgress } = useScroll ({
         target: ref,
         offset: ['start end', 'end start'],
     });
-
+    // useTransform um Wertebereich des MotionValue zu verändern -> Contentbox bewewgt sich mit und Bilder gehen leicht auseinander
     const moveContent = useTransform(scrollYProgress, [0,1], [-100, 200]);
     const moveImg = useTransform(scrollYProgress, [0,1], ['-13%', '20%']);
 
