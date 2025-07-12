@@ -4,8 +4,9 @@ const Table = ({ data, columns, onEdit, onDelete }) => {
             <thead>
                 <tr>
                     {columns.map((col) => (
-                        <th key={col.key}>col.label</th>
+                        <th key={col.key}>{col.label}</th>
                     ))}
+                    <th>Aktionen</th>
                 </tr>
             </thead>
             <tbody>
@@ -13,7 +14,7 @@ const Table = ({ data, columns, onEdit, onDelete }) => {
                     <tr key={index}>
                         {columns.map((col) => (
                             <td key={col.key}>
-                                {String(item[col.key])}
+                                {col.render ? col.render(item) : String(item[col.key])}
                             </td>
                         ))}
                         <td>
