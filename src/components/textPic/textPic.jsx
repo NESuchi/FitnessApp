@@ -1,4 +1,4 @@
-import styles from './textPic.module.css';
+import styles from './TextPic.module.css';
 
 const TextPic = ({ titel, text, img }) => {
 

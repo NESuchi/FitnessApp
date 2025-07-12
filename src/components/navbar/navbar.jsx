@@ -1,4 +1,4 @@
-import styles from "./navbar.module.css";
+import styles from "./Navbar.module.css";
 import logo from "@/assets/logo.png";
 import { Link } from "react-router-dom";
 import { IoLogIn } from "react-icons/io5";

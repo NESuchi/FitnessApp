@@ -1,4 +1,4 @@
-import styles from './intro.module.css';
+import styles from './Intro.module.css';
 // eslint-disable-next-line no-unused-vars
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';

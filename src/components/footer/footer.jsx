@@ -1,4 +1,4 @@
-import styles from './footer.module.css';
+import styles from './Footer.module.css';
 import { FaRegCompass, FaDatabase, FaKey, FaInstagram, FaGithub, FaLinkedin } from "react-icons/fa";
 import { IoShareSocialSharp } from "react-icons/io5";
 import { Link } from 'react-router-dom';
