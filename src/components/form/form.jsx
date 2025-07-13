@@ -1,6 +1,7 @@
+import styles from './Form.module.css';
 import { useState } from "react";
 
-const Form = ({ schema, initialValues, onSubmit }) => {
+const Form = ({ schema, initialValues, onSubmit, onCancel }) => {
     const [formData, setFormData] = useState(initialValues); //Initial Values aus den Configs
 
     // Wird bei jeder Änderung in einem Feld des Formulars ausgelöst um Zustände zu handlen
@@ -19,13 +20,21 @@ const Form = ({ schema, initialValues, onSubmit }) => {
         setFormData(initialValues); // setzt das Formular au die Initialvalues zurück
     }
 
+    const handleCancel = () => {
+        if (onCancel) {
+            onCancel();
+        }
+        setFormData(initialValues);
+    }
+
     return (
-        <form onSubmit={handleSubmit}>
+        <form className={styles.formWrapper} onSubmit={handleSubmit}>
             {schema.map((field) => 
                 <div key={field.name}>
-                    <label>{field.label}</label>
+                    <label className={styles.label}>{field.label}</label>
                     {field.type === 'checkbox' ? (
                         <input
+                            className={styles.inputDefault}
                             type="checkbox"
                             name={field.name}
                             checked={formData[field.name] || false}
@@ -33,6 +42,7 @@ const Form = ({ schema, initialValues, onSubmit }) => {
                         />
                     ) : (
                         <input
+                            className={styles.inputCheckbox}
                             type={field.type}
                             name={field.name}
                             value={formData[field.name]}
@@ -42,7 +52,12 @@ const Form = ({ schema, initialValues, onSubmit }) => {
                     )}
                 </div>
             )}
-            <button type="submit">Speichern</button>
+            <div className={styles.buttonWrapper}>
+                <button className={styles.buttonSave} type="submit">Speichern</button>
+                {onCancel && (
+                    <button className={styles.buttonDelete} type="button" onClick={handleCancel}>Abbrechen</button>
+                )}
+            </div>
         </form>
     )
 }

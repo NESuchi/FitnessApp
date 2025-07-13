@@ -1,9 +1,20 @@
 import styles from "./Navbar.module.css";
 import logo from "@/assets/logo.png";
 import { Link } from "react-router-dom";
-import { IoLogIn } from "react-icons/io5";
+import { IoLogIn, IoLogOut } from "react-icons/io5";
+
+import { logoutUser } from "@/reducer/slices/authSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const userMail = useSelector((state) => state.auth.user);
+
+  const handleLogOut = () => {
+    dispatch(logoutUser());
+  };
+
   return (
     <div className={styles.Wrapper}>
       <div className={styles.Navbar}>
@@ -23,9 +34,18 @@ const Navbar = () => {
           <Link to="/profile">Profile</Link> |{" "}
           <Link to="/kalender">Kalender</Link>
         </div>
-        <Link to="/login" className={styles.Login}>
-          <IoLogIn size={50} />
-        </Link>
+        {isLoggedIn && userMail ? (
+          <>
+            <button className={styles.button} onClick={handleLogOut}>
+              <IoLogOut size={50} />
+            </button>
+            <span className={styles.welcomeMessage}>Wollkommen, {userMail.email}</span>
+          </>
+        ) : (
+          <Link to="/login" className={styles.Login}>
+            <IoLogIn size={50} />
+          </Link>
+        )}
       </div>
     </div>
   );
