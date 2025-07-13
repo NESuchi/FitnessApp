@@ -26,7 +26,7 @@ const FoodTracker = () => {
     // Funktion um die im Formular eingetragenen Daten zu verarbeiten, je nachdem ob gerade editiert oder hinzugefügt wurde
     const handleSubmit = (formData) => {
         if (isEditing) {
-            dispatch(updateFood({ ...formData, id: isEditing.id })); // Übernimmt die geänderten Daten + die Id die man aus isEditing bekommt wenn man auf den Knopf drückt
+            dispatch(updateFood({ ...formData, _id: isEditing._id })); // Übernimmt die geänderten Daten + die Id die man aus isEditing bekommt wenn man auf den Knopf drückt
         } else {
             dispatch(addFood(formData)); // Fügt food der Datenbank hinzu
         }
@@ -45,7 +45,8 @@ const FoodTracker = () => {
 
     // Funktion um ein food wieder zu löschen
     const handleDelete = (food) => {
-        dispatch(deleteFood(food.id)); //löscht das explizite food aus der Datenbank
+        dispatch(deleteFood(food._id)); //löscht das explizite food aus der Datenbank
+        setIsEditing(null);
     }
 
     // Tabelle dynamisch anzeigen lassen mithilfe des state aus dem slice
@@ -66,6 +67,7 @@ const FoodTracker = () => {
         <div>
             <h2>{isEditing ? 'Mahlzeit bearbeiten' : 'Mahlzeit hinzufügen'}</h2>
             <Form
+                key={isEditing ? 'editForm' : 'addForm'}
                 schema={foodFormSchema}
                 initialValues={isEditing || foodInitialValues}
                 onSubmit={handleSubmit}

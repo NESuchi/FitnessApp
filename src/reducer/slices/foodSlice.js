@@ -15,14 +15,14 @@ export const addFood = createAsyncThunk('/foods/addFood', async (foodData) => {
 
 // Food aktualisieren
 export const updateFood = createAsyncThunk('/foods/updateFood', async (foodData) => {
-    const res = await axios.put(`/fitness/food/${foodData.id}`, foodData);
-    return res.data;
+    await axios.put(`/fitness/food/${foodData._id}`, foodData);
+    return foodData;
 });
 
 // Food löschen
 export const deleteFood = createAsyncThunk('/foods/deleteFood', async (foodId) => {
-    const res = axios.delete(`/fitness/food/${foodId}`);
-    return res.data;
+    await axios.delete(`/fitness/food/${foodId}`);
+    return foodId;
 });
 
 // Slice erstellen ("unterbereich" des stores) der den reducer, ActionCreators und ActionTypes erstellt
@@ -44,12 +44,12 @@ const foodSlice = createSlice({
                 state.status = 'loading';
             })
             .addCase(fetchFoods.fulfilled, (state, action) => {
-                state.status = 'succeded';
+                state.status = 'succeeded';
                 // item Array die Daten aus dem payload zuweisen
                 state.items = action.payload; // payload enthaält daten die von createAsyncThunk zurückgegeben wurden
             })
             .addCase(fetchFoods.rejected, (state, action) => {
-                state.status = 'faliled';
+                state.status = 'failed';
                 // lesbare fehlermeldung in state.error speichern
                 state.error = action.error.message;
             })
@@ -60,7 +60,7 @@ const foodSlice = createSlice({
             // Case für Aktualisieren
             .addCase(updateFood.fulfilled, (state, action) => {
                 // index für das Objekt speichern, dessen id mit der id aus dem payload übereinstimmt 
-                const index = state.items.findIndex(item => item.id === action.payload.id);
+                const index = state.items.findIndex(item => item._id === action.payload._id);
                 // Sicherheitsabfrage falls nichts gefunden wurde
                 if (index !== -1) {
                     // Altes Objekt austauschen
@@ -70,7 +70,7 @@ const foodSlice = createSlice({
             // Case für löschen
             .addCase(deleteFood.fulfilled, (state, action) => {
                 // neues Array erstellen, das alle Objekte enthält, deren id nicht der gelöschten id entspricht
-                state.items = state.items.filter(item => item.id !== action.payload);
+                state.items = state.items.filter(item => item._id !== action.payload);
             });
     },
 });
