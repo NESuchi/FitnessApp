@@ -15,7 +15,10 @@ export const addFood = createAsyncThunk('/foods/addFood', async (foodData) => {
 
 // Food aktualisieren
 export const updateFood = createAsyncThunk('/foods/updateFood', async (foodData) => {
-    await axios.put(`/fitness/food/${foodData._id}`, foodData);
+    const payload = { ...foodData, foodId: foodData._id };
+    delete payload._id;
+
+    await axios.put('/fitness/food/', payload);
     return foodData;
 });
 

@@ -54,6 +54,7 @@ const Login = () => {
                     schema={loginFormSchema}
                     initialValues={loginInitialValues}
                     onSubmit={handleSubmit}
+                    name="Anmelden"
                 />
             ) : (
                 <Form 
@@ -61,6 +62,7 @@ const Login = () => {
                     schema={signupFormSchema}
                     initialValues={signupInitialValues}
                     onSubmit={handleSubmit}
+                    name="Registrieren"
                 />
             )}
             {content}

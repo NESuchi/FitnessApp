@@ -67,11 +67,12 @@ const FoodTracker = () => {
         <div>
             <h2>{isEditing ? 'Mahlzeit bearbeiten' : 'Mahlzeit hinzufügen'}</h2>
             <Form
-                key={isEditing ? 'editForm' : 'addForm'}
+                key={isEditing ? 'editForm': 'addForm'}
                 schema={foodFormSchema}
                 initialValues={isEditing || foodInitialValues}
                 onSubmit={handleSubmit}
                 onCancel={handleCancel}
+                name="Speichern"
             />
             <h2>Deine gespeicherten Mahlzeiten</h2>
             {content}

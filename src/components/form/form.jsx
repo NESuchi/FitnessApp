@@ -1,8 +1,12 @@
 import styles from './Form.module.css';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const Form = ({ schema, initialValues, onSubmit, onCancel }) => {
+const Form = ({ schema, initialValues, onSubmit, onCancel, name }) => {
     const [formData, setFormData] = useState(initialValues); //Initial Values aus den Configs
+
+    useEffect(() => {
+        setFormData(initialValues);
+    }, [initialValues]);
 
     // Wird bei jeder Änderung in einem Feld des Formulars ausgelöst um Zustände zu handlen
     const handleChange = (e) => {
@@ -53,7 +57,7 @@ const Form = ({ schema, initialValues, onSubmit, onCancel }) => {
                 </div>
             )}
             <div className={styles.buttonWrapper}>
-                <button className={styles.buttonSave} type="submit">Speichern</button>
+                <button className={styles.buttonSave} type="submit">{name}</button>
                 {onCancel && (
                     <button className={styles.buttonDelete} type="button" onClick={handleCancel}>Abbrechen</button>
                 )}
