@@ -33,3 +33,19 @@
     justify-content: center;
 }
 
+.Button {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    color: var(--text);
+}
+
+.Button:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.MessageWrapper {
+    display: grid;
+}
+

@@ -56,3 +56,49 @@ h4 {
   font-size: 22px;
 }
 
+.StandardWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  padding-top: 2rem;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.StandardParagraph {
+  color: var(--textSecondary);
+  font-family: "Raleway", sans-serif;
+  text-align: center;
+}
+
+.ErrorParagraph {
+  color: red;
+  font-family: "Raleway", sans-serif;
+  font-size: 20px;
+}
+
+.StandardButton {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.25rem 0.4rem;
+  border: 2px solid var(--bgSecondary);
+  border-radius: 8px;
+
+  background-color: transparent;
+  color: var(--textSecondary);
+
+  font-weight: 600;
+  text-align: center;
+
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+}
+
+.StandardButton:hover {
+  background-color: var(--bgSecondary);
+  color: var(--text);
+  transform: translate(-2px);
+  box-shadow: var(--bgSecondary);
+}

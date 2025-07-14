@@ -12,17 +12,18 @@ const Seperator = ({ titel, text, img }) => {
         offset: ['start end', 'end start'],
     });
     // useTransform um Wertebereich des MotionValue zu verändern -> Parallax-Effekt
-    const bgY = useTransform(scrollYProgress, [0, 1], ['-20%', '20%']);
-    const contentY = useTransform(scrollYProgress, [0, 1], [200, -200]);
+    const contentY = useTransform(scrollYProgress, [0, 1], [300, -300]);
+
+    const imgStyle = {
+        backgroundImage: `url(${img})`
+    };
 
     return (
         <div ref={ref} className={styles.Wrapper}>
-            <motion.div
+            <div
                 className={styles.ImgContainer}
-                style={{
-                    backgroundImage: `url(${img})`,
-                    y: bgY,
-                }}
+                style={imgStyle}
+                role='img'
             />
 
             <motion.div className={styles.Content} style={{ y: contentY }}>

@@ -40,14 +40,14 @@ const Login = () => {
     // UI-Anzeige für den Status der Aktion
     let content;
     if (status === 'loading') {
-        content = <p>Einen Moment bitte...</p>
+        content = <p className="StandardParagraph">Einen Moment bitte...</p>
     } else if (status === 'failed') {
-        content = <p>Aktion fehlgeschlagen</p>
+        content = <p className="ErrorParagraph">Aktion fehlgeschlagen</p>
     };
 
     return (
-        <div>
-            <h2>{isLogin ? 'Login' : 'Registrieren'}</h2>
+        <div className="StandardWrapper">
+            <h2 className="StandardParagraph">{isLogin ? 'Login' : 'Registrieren'}</h2>
             {isLogin ? (
                 <Form 
                     key='login-form'
@@ -68,13 +68,13 @@ const Login = () => {
             {content}
             {isLogin ? (
                 <>
-                    <p>Noch kein Konto?</p>
-                    <button onClick={handleFormSwitch}>Jetzt Registrieren</button>
+                    <p className="StandardParagraph">Noch kein Konto?</p>
+                    <button className="StandardButton" onClick={handleFormSwitch}>Jetzt Registrieren</button>
                 </>
             ) : (
                 <>
                     <p>Schon ein Konto erstellt?</p>
-                    <button onClick={handleFormSwitch}>Jetzt Anmelden</button>
+                    <button className="StandardButton" onClick={handleFormSwitch}>Jetzt Anmelden</button>
                 </>
             )}
         </div>

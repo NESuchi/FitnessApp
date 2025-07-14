@@ -35,16 +35,18 @@ const Navbar = () => {
           <Link to="/kalender">Kalender</Link>
         </div>
         {isLoggedIn && userMail ? (
-          <>
-            <button className={styles.button} onClick={handleLogOut}>
+          <div className={styles.MessageWrapper}>
+            <button className={styles.Button} onClick={handleLogOut}>
               <IoLogOut size={50} />
             </button>
-            <span className={styles.welcomeMessage}>Wollkommen, {userMail.email}</span>
-          </>
+            <span className={styles.WelcomeMessage}>Wollkommen, {userMail.email}</span>
+          </div>
         ) : (
-          <Link to="/login" className={styles.Login}>
-            <IoLogIn size={50} />
-          </Link>
+          <button className={styles.Button} >
+            <Link to="/login" className={styles.Login}>
+              <IoLogIn size={50} />
+            </Link>
+          </button>
         )}
       </div>
     </div>
