@@ -1,39 +1,39 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "@/axiosURL";
 
-// Alle Foods fetchen
-export const fetchFoods = createAsyncThunk('/foods/fetchFoods', async () => {
-    const res = await axios.get('/fitness/food');
+// Alle Exercises fetchen
+export const fetchExercises = createAsyncThunk('/exercises/fetchExercises', async () => {
+    const res = await axios.get('/fitness/exercises');
     return res.data;
 });
 
-// Food hinzufügen
-export const addFood = createAsyncThunk('/foods/addFood', async (foodData) => {
-    const res = await axios.post('/fitness/food', foodData);
+// Exercise hinzufügen
+export const addExercise = createAsyncThunk('/exercises/addExercise', async (exerciseData) => {
+    const res = await axios.post('/fitness/exercise/', exerciseData);
     return res.data;
 });
 
-// Food aktualisieren
-export const updateFood = createAsyncThunk('/foods/updateFood', async (foodData) => {
-    const payload = { ...foodData, foodId: foodData._id };
+// Exercise aktualisieren
+export const updateExercise = createAsyncThunk('/exercises/updateExercise', async (exerciseData) => {
+    const payload = { ...exerciseData, exerciseId: exerciseData._id };
     delete payload._id;
 
-    await axios.put('/fitness/food/', payload);
-    return foodData;
+    await axios.put('/fitness/exercise/', payload);
+    return exerciseData;
 });
 
-// Food löschen
-export const deleteFood = createAsyncThunk('/foods/deleteFood', async (foodId) => {
-    await axios.delete(`/fitness/food/${foodId}`);
-    return foodId;
+// Exercise löschen
+export const deletExercise = createAsyncThunk('/exercises/deleteExercise', async (exerciseId) => {
+    await axios.delete(`/fitness/exercise/${exerciseId}`);
+    return exerciseId;
 });
 
 // Slice erstellen ("unterbereich" des stores) der den reducer, ActionCreators und ActionTypes erstellt
-const foodSlice = createSlice({ 
-    name: 'foods',
+const exerciseSlice = createSlice({ 
+    name: 'exercises',
     // Initialwerte wenn die App gestartet wird
     initialState: {
-        items: [], // Array das Food Objekte speichert
+        items: [], // Array das Exercise Objekte speichert
         status: 'idle', // Statusanzeige (bspw. loading, succeeded etc)
         error: null // Fehlermeldung
     },
@@ -43,25 +43,25 @@ const foodSlice = createSlice({
     extraReducers: (builder) => {
         builder
             // Case für fetch
-            .addCase(fetchFoods.pending, (state) => {
+            .addCase(fetchExercises.pending, (state) => {
                 state.status = 'loading';
             })
-            .addCase(fetchFoods.fulfilled, (state, action) => {
+            .addCase(fetchExercises.fulfilled, (state, action) => {
                 state.status = 'succeeded';
                 // item Array die Daten aus dem payload zuweisen
                 state.items = action.payload; // payload enthaält daten die von createAsyncThunk zurückgegeben wurden
             })
-            .addCase(fetchFoods.rejected, (state, action) => {
+            .addCase(fetchExercises.rejected, (state, action) => {
                 state.status = 'failed';
                 // lesbare fehlermeldung in state.error speichern
                 state.error = action.error.message;
             })
             // Case für hinzufügen
-            .addCase(addFood.fulfilled, (state, action) => {
+            .addCase(addExercise.fulfilled, (state, action) => {
                 state.items.push(action.payload);
             })
             // Case für Aktualisieren
-            .addCase(updateFood.fulfilled, (state, action) => {
+            .addCase(updateExercise.fulfilled, (state, action) => {
                 // index für das Objekt speichern, dessen id mit der id aus dem payload übereinstimmt 
                 const index = state.items.findIndex(item => item._id === action.payload._id);
                 // Sicherheitsabfrage falls nichts gefunden wurde
@@ -71,11 +71,11 @@ const foodSlice = createSlice({
                 }
             })
             // Case für löschen
-            .addCase(deleteFood.fulfilled, (state, action) => {
+            .addCase(deletExercise.fulfilled, (state, action) => {
                 // neues Array erstellen, das alle Objekte enthält, deren id nicht der gelöschten id entspricht
                 state.items = state.items.filter(item => item._id !== action.payload);
             });
     },
 });
 
-export default foodSlice.reducer;
+export default exerciseSlice.reducer;

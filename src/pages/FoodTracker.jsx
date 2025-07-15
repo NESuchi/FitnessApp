@@ -41,7 +41,12 @@ const FoodTracker = () => {
     // Speichert das food item in isEditing
     const handleEdit = (food) => {
         setIsEditing(food);
+        scrollToSection("Form");
     }
+
+    const scrollToSection = (id) => {
+        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    };
 
     // Funktion um ein food wieder zu löschen
     const handleDelete = (food) => {
@@ -52,28 +57,30 @@ const FoodTracker = () => {
     // Tabelle dynamisch anzeigen lassen mithilfe des state aus dem slice
     let content;
     if (foodStatus === 'loading') {
-        content = <p>Lade Lebensmittel...</p>;
+        content = <p className="StandardParagraph">Lade Lebensmittel...</p>;
     } else if (foodStatus === 'succeeded') {
         if (foods && foods.length > 0) {
             content = <Table data={foods} columns={foodTableColumns} onEdit={handleEdit} onDelete={handleDelete} />;
         } else {
-            content = <p>Noch keine Lebensmittel hinzugefügt.</p>;
+            content = <p className="StandardParagraph">Noch keine Lebensmittel hinzugefügt.</p>;
         }
     } else if (foodStatus === 'failed') {
-        content = <p>{foodError}</p>
+        content = <p className="ErrorParagraph">{foodError}</p>
     }
 
     return (
         <div>
-            <h2 className="StandardParagraph">{isEditing ? 'Mahlzeit bearbeiten' : 'Mahlzeit hinzufügen'}</h2>
-            <Form
-                key={isEditing ? 'editForm': 'addForm'}
-                schema={foodFormSchema}
-                initialValues={isEditing || foodInitialValues}
-                onSubmit={handleSubmit}
-                onCancel={handleCancel}
-                name="Speichern"
-            />
+            <section id="Form">
+                <h2 className="StandardParagraph">{isEditing ? 'Mahlzeit bearbeiten' : 'Mahlzeit hinzufügen'}</h2>
+                <Form
+                    key={isEditing ? 'editForm': 'addForm'}
+                    schema={foodFormSchema}
+                    initialValues={isEditing || foodInitialValues}
+                    onSubmit={handleSubmit}
+                    onCancel={handleCancel}
+                    name="Speichern"
+                />
+            </section>
             <h2 className="StandardParagraph">Deine gespeicherten Mahlzeiten</h2>
             {content}
         </div>
