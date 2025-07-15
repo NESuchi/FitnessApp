@@ -1,0 +1,72 @@
+.TableWrapper {
+    max-width: 1440px;
+    background-color: var(--bgSecondary);
+    margin: 3em auto;
+    padding: 2em;
+    border-radius: 12px;
+    border-collapse: collapse;
+    overflow: hidden;
+}
+
+.TableWrapper th,
+.TableWrapper td {
+    padding: 1em 1.3em;
+    text-align: left;
+    border-bottom: 1px solid var(--bg);
+}
+
+.TableWrapper th {
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.RowWrapper:hover {
+    background-color: rgb(119, 221, 117);
+}
+
+.TableWrapper body tr:last-child td {
+    border-bottom: none;
+}
+
+.Button {
+    display: inline-block;
+    padding: 0.3rem 0.5rem;
+    border-radius: 8px;
+
+    background-color: transparent;
+    color: var(--text);
+
+    font-weight: 600;
+    font-size: 1.2rem;
+    text-align: center;
+
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+}
+
+.Edit {
+    border: 2px solid var(--text);
+    background-color: transparent;
+    color: var(--text);
+    margin-right: 0.4em;
+}
+
+.Delete {
+    border: 2px solid var(--text);
+    background-color: red;
+    color: var(--text);
+}
+
+.Edit:hover {
+    background-color: var(--text);
+    color: var(--textSecondary);
+    transform: translate(-2px);
+}
+
+.Delete:Hover {
+    background-color: var(--text);
+    color: red;
+    transform: translate(-2px);
+}

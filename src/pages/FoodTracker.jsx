@@ -65,7 +65,7 @@ const FoodTracker = () => {
 
     return (
         <div>
-            <h2>{isEditing ? 'Mahlzeit bearbeiten' : 'Mahlzeit hinzufügen'}</h2>
+            <h2 className="StandardParagraph">{isEditing ? 'Mahlzeit bearbeiten' : 'Mahlzeit hinzufügen'}</h2>
             <Form
                 key={isEditing ? 'editForm': 'addForm'}
                 schema={foodFormSchema}
@@ -74,7 +74,7 @@ const FoodTracker = () => {
                 onCancel={handleCancel}
                 name="Speichern"
             />
-            <h2>Deine gespeicherten Mahlzeiten</h2>
+            <h2 className="StandardParagraph">Deine gespeicherten Mahlzeiten</h2>
             {content}
         </div>
     )

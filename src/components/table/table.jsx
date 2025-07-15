@@ -1,8 +1,10 @@
+import styles from './Table.module.css'
+
 const Table = ({ data, columns, onEdit, onDelete }) => {
     return (
-        <table>
+        <table className={styles.TableWrapper}>
             <thead>
-                <tr>
+                <tr className={styles.RowWrapper}>
                     {columns.map((col) => (
                         <th key={col.key}>{col.label}</th>
                     ))}
@@ -11,15 +13,15 @@ const Table = ({ data, columns, onEdit, onDelete }) => {
             </thead>
             <tbody>
                 {data.map((item, index) => (
-                    <tr key={index}>
+                    <tr className={styles.RowWrapper} key={index}>
                         {columns.map((col) => (
                             <td key={col.key}>
                                 {col.render ? col.render(item) : String(item[col.key])}
                             </td>
                         ))}
                         <td>
-                            <button onClick={() => onEdit(item)}>Bearbeiten</button>
-                            <button onClick={() => onDelete(item)}>Löschen</button>
+                            <button className={`${styles.Button} ${styles.Edit}`} onClick={() => onEdit(item)}>Bearbeiten</button>
+                            <button className={`${styles.Button} ${styles.Delete}`} onClick={() => onDelete(item)}>Löschen</button>
                         </td>
                     </tr>
                 ))}

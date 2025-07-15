@@ -33,33 +33,35 @@ const Form = ({ schema, initialValues, onSubmit, onCancel, name }) => {
 
     return (
         <form className={styles.formWrapper} onSubmit={handleSubmit}>
-            {schema.map((field) => 
-                <div key={field.name}>
-                    <label className={styles.label}>{field.label}</label>
-                    {field.type === 'checkbox' ? (
-                        <input
-                            className={styles.inputDefault}
-                            type="checkbox"
-                            name={field.name}
-                            checked={formData[field.name] || false}
-                            onChange={handleChange}
-                        />
-                    ) : (
-                        <input
-                            className={styles.inputCheckbox}
-                            type={field.type}
-                            name={field.name}
-                            value={formData[field.name]}
-                            onChange={handleChange}
-                            required={field.required}
-                        />
-                    )}
-                </div>
-            )}
+            <div className={styles.FlexBox}>
+                {schema.map((field) => 
+                    <div key={field.name}>
+                        <label className={styles.label}>{field.label}</label>
+                        {field.type === 'checkbox' ? (
+                            <input
+                                className={styles.inputCheckbox}
+                                type="checkbox"
+                                name={field.name}
+                                checked={formData[field.name] || false}
+                                onChange={handleChange}
+                            />
+                        ) : (
+                            <input
+                                className={styles.inputDefault}
+                                type={field.type}
+                                name={field.name}
+                                value={formData[field.name]}
+                                onChange={handleChange}
+                                required={field.required}
+                            />
+                        )}
+                    </div>
+                )}
+            </div>
             <div className={styles.buttonWrapper}>
-                <button className={styles.buttonSave} type="submit">{name}</button>
+                <button className={`${styles.Button} ${styles.Save}`} type="submit">{name}</button>
                 {onCancel && (
-                    <button className={styles.buttonDelete} type="button" onClick={handleCancel}>Abbrechen</button>
+                    <button className={`${styles.Button} ${styles.Cancel}`} type="button" onClick={handleCancel}>Abbrechen</button>
                 )}
             </div>
         </form>
