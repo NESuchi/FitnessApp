@@ -60,6 +60,21 @@ const authSlice = createSlice({
                 state.user = null,
                 state.status = 'idle';
             })
+            // Case für fehlgeschlagener Login
+            .addCase(loginUser.rejected, (state) => {
+                state.status = 'failed';
+                state.error = "Login Fehlgeschlagen. Bitte überprüfen Sie ihre Anmeldedaten";
+            })
+            // Case für fehlgeschlagene Regiustrierung
+            .addCase(signupUser.rejected, (state) => {
+                state.status = 'failed';
+                state.error = "Registrierung fehlgeschlagen. Die Mail existiert möglicherwerise bereits";
+            })
+            // Case für Hintergrund Check
+            .addCase(checkAuthStatus.rejected, (state) => {
+                state.isLoggedIn = false;
+                state.status = 'idle';
+            })
             // Matcher für erfolgreichem login oder registrierung
             .addMatcher(
                 isAnyOf(loginUser.fulfilled, signupUser.fulfilled),
@@ -74,13 +89,6 @@ const authSlice = createSlice({
                 (action) => action.type.endsWith('/pending'),
                 (state) => { state.status = 'loading'; }
             )
-            .addMatcher(
-                (action) => action.type.endsWith('/rejected'),
-                (state) => {
-                    state.isLoggedIn = false;
-                    state.status = 'failed';
-                }
-            );
     },
 });
 

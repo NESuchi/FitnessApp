@@ -45,6 +45,20 @@ const Form = ({ schema, initialValues, onSubmit, onCancel, name }) => {
                                 checked={formData[field.name] || false}
                                 onChange={handleChange}
                             />
+                        ) : field.type === 'select' ? (
+                            <select 
+                                className={styles.InputSelect}
+                                name={field.name}
+                                value={formData[field.name]}
+                                onChange={handleChange}
+                                required={field.required}
+                            >
+                                {field.options.map(option => (
+                                    <option key={option.value} value={option.value}>
+                                        {option.label}
+                                    </option>
+                                ))}
+                            </select>
                         ) : (
                             <input
                                 className={styles.inputDefault}

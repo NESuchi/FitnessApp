@@ -11,7 +11,8 @@ const Login = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { status } = useSelector((state) => state.auth); // Den Status aus dem authSlice holen
+    const status  = useSelector((state) => state.auth.status); // Den Status aus dem authSlice holen
+    const errorMessage = useSelector((state) => state.auth.error);
 
     // Funktion um den Login bzw die Registrierung auszuführen und den Nutzer weiterzuleiten
     const handleSubmit = (loginData) => {
@@ -42,7 +43,7 @@ const Login = () => {
     if (status === 'loading') {
         content = <p className="StandardParagraph">Einen Moment bitte...</p>
     } else if (status === 'failed') {
-        content = <p className="ErrorParagraph">Aktion fehlgeschlagen</p>
+        content = <p className="ErrorParagraph">{errorMessage}</p>
     };
 
     return (
@@ -73,7 +74,7 @@ const Login = () => {
                 </>
             ) : (
                 <>
-                    <p>Schon ein Konto erstellt?</p>
+                    <p className="StandardParagraph">Schon ein Konto erstellt?</p>
                     <button className="StandardButton" onClick={handleFormSwitch}>Jetzt Anmelden</button>
                 </>
             )}

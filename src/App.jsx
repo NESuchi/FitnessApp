@@ -9,6 +9,19 @@ import { useDispatch } from 'react-redux';
 
 const App = () => {
     const dispatch = useDispatch();
+    /* const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+
+    const previousIsLoggedIn = useRef();
+
+    useEffect(() => {
+        const prev = previousIsLoggedIn.current;
+
+        if(prev === true && isLoggedIn === false) {
+            window.location.reload();
+        }
+
+        previousIsLoggedIn.current = isLoggedIn;
+    }, [isLoggedIn]); */
 
     useEffect(() => {
         dispatch(checkAuthStatus());
