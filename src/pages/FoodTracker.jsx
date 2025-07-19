@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { foodFormSchema, foodTableColumns, foodInitialValues } from '../config/foodConfig';
 import { fetchFoods, addFood, updateFood, deleteFood } from '../reducer/slices/foodSlice'
 
-import Form from '../components/form/form';
+import Form from '../components/form/Form';
 import Table from '../components/table/Table';
 
 const FoodTracker = () => {

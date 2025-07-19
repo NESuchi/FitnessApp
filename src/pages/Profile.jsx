@@ -16,12 +16,14 @@ const Profile = () => {
     const profileStatus = useSelector((state) => state.profile.status);
     const profileError = useSelector((state) => state.profile.error);
 
+    const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+
     // Profiles aus der Datenbank holen 
     useEffect(() => {
-        if (profileStatus === 'idle') { // Aber nur wenn status auf idle ist, heißt noch nichts passiert ist -> verhindert immer neue Anfragen
+        if (isLoggedIn && profileStatus === 'idle') { // Aber nur wenn status auf idle ist, heißt noch nichts passiert ist -> verhindert immer neue Anfragen
             dispatch(fetchProfiles());
         }
-    }, [profileStatus, dispatch]); // Oder wenn sich profileStatus ändert 
+    }, [isLoggedIn, profileStatus, dispatch]); // Oder wenn sich profileStatus ändert 
 
     // Funktion um die im Formular eingetragenen Daten zu verarbeiten, je nachdem ob gerade editiert oder hinzugefügt wurde
     const handleSubmit = (formData) => {
@@ -56,7 +58,9 @@ const Profile = () => {
 
     // Tabelle dynamisch anzeigen lassen mithilfe des state aus dem slice
     let content;
-    if (profileStatus === 'loading') {
+    if (!isLoggedIn) {
+        content = <p className="ErrorParagraph">Melde dich an um Profile zu erstellen</p>;
+    } else if (profileStatus === 'loading') {
         content = <p className="StandardParagraph">Lade Profile...</p>;
     } else if (profileStatus === 'succeeded') {
         if (profiles && profiles.length > 0) {

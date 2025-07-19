@@ -4,12 +4,12 @@ import ScrollButton from './components/scrollButton/ScrollButton';
 import { Outlet } from "react-router-dom";
 
 import { checkAuthStatus } from './reducer/slices/authSlice';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 const App = () => {
     const dispatch = useDispatch();
-    /* const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+    const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
     const previousIsLoggedIn = useRef();
 
@@ -21,7 +21,7 @@ const App = () => {
         }
 
         previousIsLoggedIn.current = isLoggedIn;
-    }, [isLoggedIn]); */
+    }, [isLoggedIn]);
 
     useEffect(() => {
         dispatch(checkAuthStatus());

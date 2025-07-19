@@ -21,7 +21,9 @@ const Table = ({ data, columns, onEdit, onDelete }) => {
                         ))}
                         <td>
                             <button className={`${styles.Button} ${styles.Edit}`} onClick={() => onEdit(item)}>Bearbeiten</button>
-                            <button className={`${styles.Button} ${styles.Delete}`} onClick={() => onDelete(item)}>Löschen</button>
+                            {onDelete && (
+                                <button className={`${styles.Button} ${styles.Delete}`} onClick={() => onDelete(item)}>Löschen</button>
+                            )}
                         </td>
                     </tr>
                 ))}
