@@ -31,3 +31,9 @@ export const foodInitialValues = {
   fiber: '',
   drink: false
 }
+
+// Config für foods in der Kalendertabelle
+export const foodPanelColumns = [
+  { key: 'name', label: 'Mahlzeit' },
+  { key: 'energy', label: 'Energie (kcal)' }
+]

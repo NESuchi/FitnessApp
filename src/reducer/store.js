@@ -2,7 +2,8 @@ import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './slices/authSlice';
 import foodReducer from './slices/foodSlice';
 import exerciseReducer from './slices/exerciseSlice';
-import profileReducer from './slices/profileSlice'
+import profileReducer from './slices/profileSlice';
+import dayReducer from './slices/daySlice';
 
 const store = configureStore({
     reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
         food: foodReducer,
         exercise: exerciseReducer,
         profile: profileReducer,
+        day: dayReducer
     },
 });
 
