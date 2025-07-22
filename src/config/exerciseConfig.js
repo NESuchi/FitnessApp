@@ -22,5 +22,5 @@ export const exerciseInitialValues = {
 // Config für Exercises in der Kalendertabelle
 export const exercisePanelColumns = [
   { key: 'name', label: 'Übung' },
-  { key: 'energyBurnded', label: 'Energie verbrannt (kcal/h)' }
+  { key: 'energyBurned', label: 'Energie verbrannt (kcal/h)' }
 ]

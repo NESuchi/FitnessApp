@@ -1,0 +1,6 @@
+.EntryMarker {
+    width: 8px;
+    height: 8px;
+    background-color: var(--bgSecondary);
+    border-radius: 50%;
+}

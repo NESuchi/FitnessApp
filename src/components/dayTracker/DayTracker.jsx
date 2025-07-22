@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Calendar from "react-calendar";
 import 'react-calendar/dist/Calendar.css'
 
-import { fetchSingleDay, addDay, updateDay } from "@/reducer/slices/daySlice";
+import { fetchSingleDay, addDay, updateDay, fetchAllDays, deleteDay } from "@/reducer/slices/daySlice";
 import { fetchFoods } from '@/reducer/slices/foodSlice';
 import { fetchExercises } from '@/reducer/slices/exerciseSlice';
 
@@ -23,13 +23,28 @@ const DayTracker = ({ profile }) => {
     const dispatch = useDispatch();
     
     const { selectedDay, status: dayStatus } = useSelector((state) => state.day);
+    const { items: allDaysWithEntries } = useSelector((state) => state.day);
     const { items: allFoods } = useSelector((state) => state.food);
     const { items: allExercises } = useSelector((state) => state.exercise);
+
+    const markDaysWithEntries = ({ date, view }) => {
+        const hasEntry = allDaysWithEntries.some(
+            day => toLocalISOString(date) === day.date
+        );
+
+        if (view === 'month' && hasEntry) {
+            return <div className={styles.EntryMarker}></div>
+        }
+        return null;
+    }
 
     useEffect(() => {
         dispatch(fetchFoods());
         dispatch(fetchExercises());
-    }, [dispatch]);
+        if (profile) {
+            dispatch(fetchAllDays(profile._id));
+        }
+    }, [dispatch, profile]);
 
     const handleDayClick = useCallback((clickedDate) => {
         setDate(clickedDate);
@@ -42,6 +57,12 @@ const DayTracker = ({ profile }) => {
     }, [handleDayClick]);
 
     const handleAddItem = (item, itemType, amount) => {
+        const actionCompleted = (action) => {
+            dispatch(action).then(() => {
+                dispatch(fetchAllDays(profile._id));
+            })
+        }
+
         if (selectedDay) {
             const updatedDay = { ...selectedDay };
             if (itemType === 'food') {
@@ -49,7 +70,7 @@ const DayTracker = ({ profile }) => {
             } else {
                 updatedDay.exercise = [...updatedDay.exercise, { exerciseId: item._id, timeInMinutes: amount }];
             }
-            dispatch(updateDay(updatedDay));
+            actionCompleted(updateDay(updatedDay));
         } else {
             const newDayData = {
                 profileId: profile._id,
@@ -57,7 +78,7 @@ const DayTracker = ({ profile }) => {
                 food: itemType === 'food' ? [{ foodId: item._id, amount }] : [],
                 exercise: itemType === 'exercise' ? [{ exerciseId: item._id, timeInMinutes: amount}] : [],
             };
-            dispatch(addDay(newDayData));
+            actionCompleted(addDay(newDayData));
         }
     };
 
@@ -70,13 +91,26 @@ const DayTracker = ({ profile }) => {
         } else {
             updatedDay.exercise = updatedDay.exercise.filter(e => e._id !== subItemId);
         }
-        dispatch(updateDay(updatedDay));
+        
+        const isEmpty = updatedDay.food.length === 0 && updatedDay.exercise.length === 0;
+
+        if (isEmpty) {
+            dispatch(deleteDay(updatedDay._id)).then(() => {
+                dispatch(fetchAllDays(profile._id));
+                handleDayClick(date);
+            });
+        } else {
+            dispatch(updateDay(updatedDay)).then(() => {
+                dispatch(fetchAllDays(profile._id));
+            })
+        }
     };
 
     return (
         <div className={styles.Wrapper}>
             <div className={styles.CalendarWrapper}>
                 <Calendar
+                    tileContent={markDaysWithEntries}
                     onChange={setDate}
                     value={date}
                     onClickDay={handleDayClick}
