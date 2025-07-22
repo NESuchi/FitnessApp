@@ -2,10 +2,10 @@ import styles from './DayDetails.module.css';
 
 const DayDetails = ({ day, status, onRemove, allFoods, allExercises }) => {
 
-    const currentDay = Array.isArray(day) && day.length > 0 ? day[0] : null;
+    const currentDay = day;
 
     const findItemDetail = (id, list) => {
-        list.find(item => item._id === id);
+        return list.find(item => item._id === id);
     }
 
     if (status === 'loading') {

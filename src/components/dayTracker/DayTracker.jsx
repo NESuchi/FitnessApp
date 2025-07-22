@@ -12,6 +12,12 @@ import AddItemTable from "./addItemTable/AddItemTable";
 
 import styles from './DayTracker.module.css';
 
+const toLocalISOString = (date) => {
+    const offset = date.getTimezoneOffset();
+    const adjustedDate = new Date(date.getTime() - (offset * 60 * 1000));
+    return adjustedDate.toISOString().split('T')[0];
+}
+
 const DayTracker = ({ profile }) => {
     const [date, setDate] = useState(new Date());
     const dispatch = useDispatch();
@@ -27,7 +33,7 @@ const DayTracker = ({ profile }) => {
 
     const handleDayClick = useCallback((clickedDate) => {
         setDate(clickedDate);
-        const formattedDate = clickedDate.toISOString().split('T')[0];
+        const formattedDate = toLocalISOString(clickedDate);
         dispatch(fetchSingleDay({ profileId: profile._id, date: formattedDate }));
     }, [dispatch, profile]);
 
@@ -36,22 +42,18 @@ const DayTracker = ({ profile }) => {
     }, [handleDayClick]);
 
     const handleAddItem = (item, itemType, amount) => {
-        const currentDay = Array.isArray(selectedDay) && selectedDay.length > 0 ? selectedDay[0] : null;
-
-        if (currentDay) {
-            const updatedDay = { ...currentDay };
+        if (selectedDay) {
+            const updatedDay = { ...selectedDay };
             if (itemType === 'food') {
-                const newFoodEntry = { foodId: item._id, amount };
-                updatedDay.food = [...updatedDay.food, newFoodEntry];
+                updatedDay.food = [...updatedDay.food, { foodId: item._id, amount}];
             } else {
-                const newExerciseEntry = { exerciseId: item._id, timeInMinutes: amount };
-                updatedDay.exercise = [...updatedDay.exercise, newExerciseEntry];
+                updatedDay.exercise = [...updatedDay.exercise, { exerciseId: item._id, timeInMinutes: amount }];
             }
             dispatch(updateDay(updatedDay));
         } else {
             const newDayData = {
                 profileId: profile._id,
-                date: date.toISOString().split('T')[0],
+                date: toLocalISOString(date),
                 food: itemType === 'food' ? [{ foodId: item._id, amount }] : [],
                 exercise: itemType === 'exercise' ? [{ exerciseId: item._id, timeInMinutes: amount}] : [],
             };
@@ -60,12 +62,11 @@ const DayTracker = ({ profile }) => {
     };
 
     const handleRemoveItem = (subItemId, itemType) => {
-        const currentDay = Array.isArray(selectedDay) && selectedDay.length > 0 ? selectedDay[0] : null;
-        if (!currentDay) return;
+        if (!selectedDay) return;
 
-        const updatedDay = { ...currentDay };
+        const updatedDay = { ...selectedDay };
         if (itemType === 'food') {
-            updatedDay.food = updateDay.food.filter(f => f._id !== subItemId);
+            updatedDay.food = updatedDay.food.filter(f => f._id !== subItemId);
         } else {
             updatedDay.exercise = updatedDay.exercise.filter(e => e._id !== subItemId);
         }

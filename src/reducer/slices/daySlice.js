@@ -41,17 +41,12 @@ const daySlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(addDay.fulfilled, (state, action) => {
-                state.items.push(action.payload);
                 state.selectedDay = action.payload;
+                state.status = 'succeeded';
             })
             .addCase(updateDay.fulfilled, (state, action) => {
-                const index = state.items.findIndex(item => item._id === action.payload._id);
-                if (index !== -1) {
-                state.items[index] = action.payload;
-                }
-                if (state.selectedDay && state.selectedDay._id == action.payload._id) {
-                    state.selectedDay = action.payload;
-                }
+                state.selectedDay = action.payload;
+                state.status = 'succeeded';
             })
             .addCase(deleteDay.fulfilled, (state, action) => {
                 state.items = state.items.filter(item => item._id !== action.payload);
