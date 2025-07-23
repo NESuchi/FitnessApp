@@ -28,10 +28,10 @@ const Navbar = () => {
           />
         </div>
         <div className={styles.Navigation}>
-          <Link to="/">Home</Link> |{" "}
-          <Link to="/food-tracker">Food Tracker</Link> |{" "}
-          <Link to="/exercises">Exercises</Link> |{" "}
-          <Link to="/profile">Profile</Link> |{" "}
+          <Link to="/">Home</Link> 
+          <Link to="/food-tracker">Food Tracker</Link> 
+          <Link to="/exercises">Exercises</Link> 
+          <Link to="/profile">Profile</Link> 
           <Link to="/kalender">Kalender</Link>
         </div>
         {isLoggedIn && userMail ? (

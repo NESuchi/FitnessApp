@@ -29,13 +29,13 @@ const DayDetails = ({ day, status, onRemove, allFoods, allExercises }) => {
 
             <h4>Mahlzeiten</h4>
             {currentDay.food && currentDay.food.length > 0 ? (
-                <ul>
+                <ul className={styles.List}>
                     {currentDay.food.map(foodEntry => {
                         const foodDetails = findItemDetail(foodEntry.foodId, allFoods);
                         return (
                             <li key={foodEntry._id}>
                                 <span>{foodDetails ? foodDetails.name : 'Unbekannt'} ({foodEntry.amount})</span>
-                                <button onClick={() => onRemove(foodEntry._id, 'food')}>Löschen</button>
+                                <button className={styles.Button} onClick={() => onRemove(foodEntry._id, 'food')}>Löschen</button>
                             </li>
                         );
                     })}
@@ -50,7 +50,7 @@ const DayDetails = ({ day, status, onRemove, allFoods, allExercises }) => {
                         return (
                             <li key={exerciseEntry._id}>
                                 <span>{exerciseDetail ? exerciseDetail.name : 'Unbekannt'} ({exerciseEntry.timeInMinutes})</span>
-                                <button onClick={() => onRemove(exerciseEntry._id, 'exercise')}>Löschen</button>
+                                <button className={styles.Button} onClick={() => onRemove(exerciseEntry._id, 'exercise')}>Löschen</button>
                             </li>
                         );
                     })}

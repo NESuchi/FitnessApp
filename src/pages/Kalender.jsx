@@ -26,26 +26,27 @@ const Kalender = () => {
 
     if (!isLoggedIn) {
         return (
-            <p>Bitte melden Sie sich an, um den Kalender zu nutzen</p>
+            <p style={{ height: "60vh" }} className="ErrorParagraph">Bitte melden Sie sich an, um den Kalender zu nutzen</p>
         );
     }
 
     if (status === 'loading') {
         return (
-            <p>Lade Profile...</p>
+            <p className="StandardParagraph">Lade Profile...</p>
         );
     }
     return (
         <div className={styles.Wrapper}>
-            <h1>Mein Tag</h1>
+            <h1 className="StandardParagraph">Mein Kalender</h1>
 
             {profiles && profiles.length > 0 ? (
                 <>
-                    <div className={styles.ProfileSelector}>
+                    <div className={styles.ProfileSelect}>
                         <label htmlFor="profile-select">
                             Aktives Profil
                         </label>
-                        <select 
+                        <select
+                            className={styles.Select}
                             id="profile-select"
                             value={activeProfile?._id || ''}
                             onChange={(e) => setActiveProfile(profiles.find(p => p._id === e.target.value))}
@@ -60,7 +61,7 @@ const Kalender = () => {
                     {activeProfile && <DayTracker profile={activeProfile} />}
                 </>
             ) : (
-                <p>Bitte erstellen sie zuerst ein Profil, um den Kalender zu nutzen</p>
+                <p style={{ height: "60vh"}} className="ErrorParagraph">Bitte erstellen sie zuerst ein Profil, um den Kalender zu nutzen</p>
             )}
         </div>
     );

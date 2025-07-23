@@ -1,0 +1,38 @@
+.Wrapper {
+    display: grid;
+    gap: 20px;
+}
+
+li {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.Button {
+    display: inline-block;
+    padding: 0.3rem 0.5rem;
+    border-radius: 8px;
+
+    background-color: transparent;
+    color: var(--text);
+
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-align: center;
+
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+
+    border: 2px solid var(--text);
+    background-color: red;
+    color: var(--text);
+}
+
+.Button:hover {
+    background-color: var(--text);
+    color: red;
+    transform: translate(-2px);
+}

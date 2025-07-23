@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { profileFormSchema, profileTableColumns, profileInitialValues } from '../config/profileConfig';
 import { fetchProfiles, addProfile, updateProfile, deleteProfile } from '../reducer/slices/profileSlice'
 
-import Form from '../components/form/form';
+import Form from '../components/form/Form';
 import Table from '../components/table/Table';
 
 const Profile = () => {
@@ -64,7 +64,7 @@ const Profile = () => {
         content = <p className="StandardParagraph">Lade Profile...</p>;
     } else if (profileStatus === 'succeeded') {
         if (profiles && profiles.length > 0) {
-            content = <Table data={profiles} columns={profileTableColumns} onEdit={handleEdit} onDelete={handleDelete} />;
+            content = <Table data={profiles} columns={profileTableColumns} onEdit={handleEdit} onDelete={handleDelete} buttonName="Bearbeiten" />;
         } else {
             content = <p className="StandardParagraph">Noch keine Profile hinzugefügt.</p>;
         }

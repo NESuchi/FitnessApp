@@ -60,7 +60,7 @@ const FoodTracker = () => {
         content = <p className="StandardParagraph">Lade Lebensmittel...</p>;
     } else if (foodStatus === 'succeeded') {
         if (foods && foods.length > 0) {
-            content = <Table data={foods} columns={foodTableColumns} onEdit={handleEdit} onDelete={handleDelete} />;
+            content = <Table data={foods} columns={foodTableColumns} onEdit={handleEdit} onDelete={handleDelete} buttonName="Bearbeiten" />;
         } else {
             content = <p className="StandardParagraph">Noch keine Lebensmittel hinzugefügt.</p>;
         }

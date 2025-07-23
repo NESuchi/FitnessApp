@@ -11,6 +11,7 @@ import DayDetails from "./dayDetails/DayDetails";
 import AddItemTable from "./addItemTable/AddItemTable";
 
 import styles from './DayTracker.module.css';
+import Calculator from "./calculator/Calculator";
 
 const toLocalISOString = (date) => {
     const offset = date.getTimezoneOffset();
@@ -60,6 +61,7 @@ const DayTracker = ({ profile }) => {
         const actionCompleted = (action) => {
             dispatch(action).then(() => {
                 dispatch(fetchAllDays(profile._id));
+                handleDayClick(date);
             })
         }
 
@@ -115,6 +117,15 @@ const DayTracker = ({ profile }) => {
                     value={date}
                     onClickDay={handleDayClick}
                     locale="de-DE"
+                />
+            </div>
+
+            <div className={styles.CalculatorWrapper}>
+                <Calculator
+                    allFoods={allFoods}
+                    allExercises={allExercises}
+                    profile={profile}
+                    day={selectedDay}
                 />
             </div>
 

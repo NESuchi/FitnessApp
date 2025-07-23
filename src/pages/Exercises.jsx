@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { exerciseFormSchema, exerciseTableColumns, exerciseInitialValues } from '../config/exerciseConfig';
 import { fetchExercises, addExercise, updateExercise, deletExercise } from '../reducer/slices/exerciseSlice'
 
-import Form from '../components/form/form';
+import Form from '../components/form/Form';
 import Table from '../components/table/Table';
 
 const Exercises = () => {
@@ -60,7 +60,7 @@ const Exercises = () => {
         content = <p className="StandardParagraph">Lade Exercises...</p>;
     } else if (exerciseStatus === 'succeeded') {
         if (exercises && exercises.length > 0) {
-            content = <Table data={exercises} columns={exerciseTableColumns} onEdit={handleEdit} onDelete={handleDelete} />;
+            content = <Table data={exercises} columns={exerciseTableColumns} onEdit={handleEdit} onDelete={handleDelete} buttonName="Bearbeiten" />;
         } else {
             content = <p className="StandardParagraph">Noch keine Exercises hinzugefügt.</p>;
         }

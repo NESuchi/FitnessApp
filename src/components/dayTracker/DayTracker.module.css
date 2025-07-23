@@ -4,3 +4,28 @@
     background-color: var(--bgSecondary);
     border-radius: 50%;
 }
+
+.Wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    place-items: center;
+}
+
+.CalculatorWrapper {
+    background-color: var(--bgSecondary);
+    padding: 2rem;
+    border-radius: 18px;
+    box-shadow: 0 8px 16px rgba(39, 104, 13, 0.5);
+}
+
+.DetailsWrapper {
+    background-color: var(--bgSecondary);
+    padding: 2rem;
+    border-radius: 18px;
+    box-shadow: 0 8px 16px rgba(39, 104, 13, 0.5);
+    min-width: 456px;   
+}
+
+.TableWrapper {
+    margin-top: 4rem;
+}

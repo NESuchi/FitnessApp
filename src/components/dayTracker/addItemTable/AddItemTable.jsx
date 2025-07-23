@@ -21,42 +21,45 @@ const AddItemTable = ({ allFoods, allExercises, onAddItem }) => {
 
     return (
         <div className={styles.Wrapper}>
-            <h3>Eintrag hinzufügen</h3>
+            <h3 className='StandardParagraph'>Eintrag hinzufügen</h3>
             <div className={styles.Tabs}>
                 <button 
                     onClick={() => setActiveTab('food')} 
-                    className={activeTab === 'food' ? styles.activeButton : styles.hidden}
+                    className={activeTab === 'food' ? styles.Active : styles.Hidden}
                 >
                     Mahlzeiten
                 </button>
                 <button 
                     onClick={() => setActiveTab('exercise')} 
-                    className={activeTab === 'exercise' ? styles.activeButton : styles.hidden}
+                    className={activeTab === 'exercise' ? styles.Active : styles.Hidden}
                 >
                     Übungen
                 </button>
             </div>
 
-            <div className={styles.TabWrapper}>
-                <div className={styles.input}>
-                    <label>Menge</label>
-                    <input 
-                        type='number'
-                        value={amount}
-                        onChange={(e) => setAmount(e.target.value)}
-                    />
-                </div>
+            <div className={styles.Input}>
+                <label>Menge</label>
+                <input 
+                    type='number'
+                    value={amount}
+                    onChange={(e) => setAmount(e.target.value)}
+                />
+            </div>
+
+            <div className={styles.TableWrapper}>
                 {activeTab === 'food' ? (
                     <Table 
                         data={allFoods}
                         columns={foodPanelColumns}
                         onEdit={(item) => handleAdd(item, 'food')}
+                        buttonName="Hinzufügen"
                     />
                 ) : (
                     <Table 
                         data={allExercises}
                         columns={exercisePanelColumns}
                         onEdit={(item) => handleAdd(item, 'exercise')}
+                        buttonName="Hinzufügen"
                     />
                 )}
             </div>

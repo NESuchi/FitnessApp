@@ -1,6 +1,6 @@
 import styles from './Table.module.css'
 
-const Table = ({ data, columns, onEdit, onDelete }) => {
+const Table = ({ data, columns, onEdit, onDelete, buttonName }) => {
     return (
         <table className={styles.TableWrapper}>
             <thead>
@@ -20,7 +20,7 @@ const Table = ({ data, columns, onEdit, onDelete }) => {
                             </td>
                         ))}
                         <td>
-                            <button className={`${styles.Button} ${styles.Edit}`} onClick={() => onEdit(item)}>Bearbeiten</button>
+                            <button className={`${styles.Button} ${styles.Edit}`} onClick={() => onEdit(item)}>{buttonName}</button>
                             {onDelete && (
                                 <button className={`${styles.Button} ${styles.Delete}`} onClick={() => onDelete(item)}>Löschen</button>
                             )}
