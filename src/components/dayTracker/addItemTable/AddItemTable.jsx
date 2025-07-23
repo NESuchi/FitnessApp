@@ -38,7 +38,7 @@ const AddItemTable = ({ allFoods, allExercises, onAddItem }) => {
             </div>
 
             <div className={styles.Input}>
-                <label>Menge</label>
+                <label>{activeTab === 'food' ? "Menge" : "Zeit"}</label>
                 <input 
                     type='number'
                     value={amount}
