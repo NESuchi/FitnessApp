@@ -1,7 +1,6 @@
 .Wrapper {
     display: grid;
     gap: 10px;
-    min-width: 408px;
 }
 
 .Tabs {
@@ -47,4 +46,10 @@
     cursor: pointer;
 
     transition: all 0.3s ease;
+}
+
+@media (min-width: 480px) {
+    .Wrapper {
+        min-width: 408px;
+    }
 }

@@ -34,7 +34,7 @@ const DayDetails = ({ day, status, onRemove, allFoods, allExercises }) => {
                         const foodDetails = findItemDetail(foodEntry.foodId, allFoods);
                         return (
                             <li key={foodEntry._id}>
-                                <span>{foodDetails ? foodDetails.name : 'Unbekannt'} ({foodEntry.amount})</span>
+                                <span>{foodDetails ? foodDetails.name : 'Unbekannt'} ({foodEntry.amount} g/ml)</span>
                                 <button className={styles.Button} onClick={() => onRemove(foodEntry._id, 'food')}>Löschen</button>
                             </li>
                         );
@@ -49,7 +49,7 @@ const DayDetails = ({ day, status, onRemove, allFoods, allExercises }) => {
                         const exerciseDetail = findItemDetail(exerciseEntry.exerciseId, allExercises);
                         return (
                             <li key={exerciseEntry._id}>
-                                <span>{exerciseDetail ? exerciseDetail.name : 'Unbekannt'} ({exerciseEntry.timeInMinutes})</span>
+                                <span>{exerciseDetail ? exerciseDetail.name : 'Unbekannt'} ({exerciseEntry.timeInMinutes} Minuten)</span>
                                 <button className={styles.Button} onClick={() => onRemove(exerciseEntry._id, 'exercise')}>Löschen</button>
                             </li>
                         );

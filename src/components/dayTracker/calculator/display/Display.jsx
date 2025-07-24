@@ -16,7 +16,7 @@ const Display = ({ data }) => {
                 <div className={styles.extraInfo}>
                     <p>Durch Sport verbrannt: <span>{data.burned} {data.unit}</span></p>
                     <p className={styles.deficit}>
-                        Bilanz (Defizit/Überschuss): <span>{data.deficit} {data.unit}</span>
+                        Defizit: <span>{data.deficit} {data.unit}</span>
                     </p>
                 </div>
             )}

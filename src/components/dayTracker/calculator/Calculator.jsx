@@ -10,7 +10,7 @@ const Calculator = ({ allFoods, allExercises, profile, day }) => {
     const maxValues = useMemo(() => calculateMaxValues(profile), [profile]);
     const actualValues = useMemo(() => calculateActualValues(day, allFoods, allExercises), [day, allFoods, allExercises]);
 
-    const deficit = maxValues.maxEnergy - actualValues.consumedEnergy + actualValues.burnedEnergy;
+    const deficit = (actualValues.consumedEnergy - maxValues.maxEnergy) -  actualValues.burnedEnergy;
 
     const data = {
         energy: {
