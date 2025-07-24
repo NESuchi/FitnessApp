@@ -15,11 +15,11 @@ const Table = ({ data, columns, onEdit, onDelete, buttonName }) => {
                 {data.map((item, index) => (
                     <tr className={styles.RowWrapper} key={index}>
                         {columns.map((col) => (
-                            <td key={col.key}>
+                            <td key={col.key} data-label={col.label}>
                                 {col.render ? col.render(item) : String(item[col.key])}
                             </td>
                         ))}
-                        <td>
+                        <td className={styles.ButtonWrapper}>
                             <button className={`${styles.Button} ${styles.Edit}`} onClick={() => onEdit(item)}>{buttonName}</button>
                             {onDelete && (
                                 <button className={`${styles.Button} ${styles.Delete}`} onClick={() => onDelete(item)}>Löschen</button>

@@ -3,23 +3,27 @@
   min-height: 330px;
   background-color: var(--bgSecondary);
   color: var(--text);
+  margin-top: 3rem;
 }
 
 .Navigation {
-  flex: 1;
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
   padding: 2em;
-  gap: 2rem;
+  gap: 3rem;
+  box-sizing: border-box;
 }
 
 .Section {
-  flex: 1;
   text-align: center;
+  max-width: 120px;
 }
 
 .SectionTitle {
-  margin-bottom: 1em;
+  margin-bottom: 1rem;
+  white-space: nowrap;
 }
 
 .LinkList {
@@ -36,14 +40,31 @@
 }
 
 .ImgWrapper {
-  flex-basis: 25%;
-  height: 330px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: none;
 }
 
-.ImgWrapper img {
-  height: 100%;
-  object-fit: contain;
+@media (min-width: 1120px) {
+  .Navigation {
+    flex-wrap: nowrap;
+  }
+
+  .SectionTitle {
+    white-space: initial;
+  }
+
+  .Section {
+    max-width: none;
+  }
+
+  .ImgWrapper {
+    height: 330px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ImgWrapper img {
+    height: 100%;
+    object-fit: contain;
+  }
 }

@@ -7,7 +7,8 @@
 
 .Wrapper {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
+    gap: 40px;
     place-items: center;
 }
 
@@ -27,5 +28,13 @@
 }
 
 .TableWrapper {
-    margin-top: 4rem;
+    width: 100%;
+}
+
+@media (min-width: 975px) {
+    .Wrapper {
+        grid-template-columns: 1fr 1fr;
+        gap: none;
+        place-items: center;
+    }
 }

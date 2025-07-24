@@ -1,44 +1,117 @@
+.Overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    background-color: rgba(0, 0, 0, 0.5);
+    
+    z-index: 99;
+    
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.Overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
 .Wrapper {
+    position: relative;
     background-color: var(--bgSecondary);
-    min-height: 152px;
+    min-height: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0em 6em;
-    margin-bottom: 2.5em;
+    padding: 0em 1.5rem;
+
+    z-index: 100;
 }
 
 .Navbar {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     width: 100%;
     max-width: 1440px;
 }
 
-.Img {
-    flex: 1;
+.Logo {
+    height: 80px;
+    width: 80px;
 }
 
 .Navigation {
-    flex: 4;
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    gap: 40px;
+    gap: 10px;
+    padding: 2rem;
     font-size: large;
+    background-color: var(--bgSecondary);
+
+    position: absolute;
+    top: 100px;
+    left: 0;
+    width: 100%;
+
+    transform: translate(-150%);
+    z-index: 100;
+}
+
+.Navigation.Open {
+    transform: translate(0);
+}
+
+.Navigation a {
+    font-size: 1.2rem;
     font-weight: 500;
+    color: var(--text);
+}
+
+.BurgerMenu {
+    display: flex;
+    background: none;
+    border: none;
+    color: var(--text);
+    cursor: pointer;
+    z-index: 101;
+}
+
+.AuthDesktop {
+    display: none;
+}
+
+.AuthMobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 1rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding-top: 1.5rem;
+    width: 100%;
 }
 
 .Login {
-    flex: 1;
     display: flex;
-    justify-content: center;
+    align-items: center;
+    gap: 5px;
 }
 
 .Button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: transparent;
     border: none;
     padding: 0;
     color: var(--text);
+    font-size: 1.2rem;
 }
 
 .Button:hover {
@@ -48,5 +121,42 @@
 
 .MessageWrapper {
     display: grid;
+}
+
+.WelcomeMessage {
+    font-size: 1rem;
+    text-align: center;
+}
+
+@media (min-width: 925px) {
+    .Wrapper {
+        padding: 0 3rem;
+    }
+
+    .Logo {
+        height: 117px;
+        width: 117px;
+    }
+
+    .BurgerMenu {
+        display: none;
+    }
+
+    .Navigation {
+        position: static;
+        flex-direction: row;
+        transform: none;
+        background: none;
+        padding: 0;
+        gap: 40px;
+    }
+
+    .AuthMobile {
+        display: none;
+    }
+
+    .AuthDesktop {
+        display: flex;
+    }
 }
 

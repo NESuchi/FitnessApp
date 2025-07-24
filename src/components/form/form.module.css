@@ -10,7 +10,7 @@
 
 .FlexBox {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 20px;
 }
 
@@ -96,3 +96,8 @@
     transform: translate(-2px);
 }
 
+@media (min-width: 400px) {
+    .FlexBox {
+        grid-template-columns: 1fr 1fr;
+    }
+}

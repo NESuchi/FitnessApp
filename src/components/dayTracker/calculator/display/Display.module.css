@@ -1,3 +1,41 @@
+.Wrapper {
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-top: 1rem;
+}
+
 .Values {
-    margin: 0.5rem 0 0.5rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.Values span:first-child {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.Values span:last-child {
+  font-size: 1.2rem;
+}
+
+.extraInfo {
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.extraInfo p {
+  display: flex;
+  justify-content: space-between; 
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+}
+
+.extraInfo p span {
+  font-weight: 600;
+}
+
+.deficit span {
+  color: red; 
 }

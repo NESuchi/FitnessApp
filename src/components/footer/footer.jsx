@@ -25,10 +25,6 @@ const navItems = [
                 title: "Kalender",
                 path: "/kalender",
             },
-            {
-                title: "Login",
-                path: "/login",
-            },
         ],
     },
     {
@@ -50,7 +46,7 @@ const navItems = [
         ],
     },
     {
-        title: "Nützliche Links",
+        title: "Nützliches",
         icon: <FaKey />,
         list: [
             {
@@ -79,10 +75,12 @@ const Footer = () => {
                 
                 {navItems.map((section)=> (
                     <div key={section.title} className={styles.Section}>
-                        <h4 className={styles.SectionTitle}>
-                            {section.icon} {section.title}
-                        </h4>
                         <ul className={styles.LinkList}>
+                            <li>
+                                <h4 className={styles.SectionTitle}>
+                                    {section.icon} {section.title}
+                                </h4>
+                            </li>
                             {section.list.map((item) => {
                                 const isExternal = item.path.startsWith("http");
                                 return (
@@ -104,10 +102,12 @@ const Footer = () => {
                 ))}
 
                 <div className={styles.Section}>
-                    <h4 className={styles.SectionTitle}>
-                        <IoShareSocialSharp /> Socials
-                    </h4>
                     <ul className={styles.LinkList}>
+                        <li>
+                            <h4 className={styles.SectionTitle}>
+                                <IoShareSocialSharp /> Socials
+                            </h4>
+                        </li>
                         <li>
                             <a 
                                 href="https://www.instagram.com/tf_nico.e/?next=%2F" 

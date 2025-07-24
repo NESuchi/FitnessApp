@@ -77,13 +77,14 @@ h4 {
   
   padding-top: 2rem;
   max-width: 1440px;
-  margin: 0 auto;
+  margin: 0 0 3rem auto;
 }
 
 .StandardParagraph {
   color: var(--textSecondary);
   font-family: "Raleway", sans-serif;
   text-align: center;
+  margin-top: 3rem;
 }
 
 .ErrorParagraph {
@@ -91,6 +92,7 @@ h4 {
   font-family: "Raleway", sans-serif;
   font-size: 20px;
   text-align: center;
+  margin-top: 3rem;
 }
 
 .StandardButton {
