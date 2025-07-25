@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { profileFormSchema, profileTableColumns, profileInitialValues } from '../config/profileConfig';
 import { fetchProfiles, addProfile, updateProfile, deleteProfile } from '../reducer/slices/profileSlice'
 
-import Form from '../components/form/Form';
+import Form from '../components/form/form';
 import Table from '../components/table/Table';
 
 const Profile = () => {
@@ -11,36 +11,31 @@ const Profile = () => {
 
     const dispatch = useDispatch();
 
-    // Items, Status und Error aus dem slice holen
     const profiles = useSelector((state) => state.profile.items);
     const profileStatus = useSelector((state) => state.profile.status);
     const profileError = useSelector((state) => state.profile.error);
 
     const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
-    // Profiles aus der Datenbank holen 
     useEffect(() => {
-        if (isLoggedIn && profileStatus === 'idle') { // Aber nur wenn status auf idle ist, heißt noch nichts passiert ist -> verhindert immer neue Anfragen
+        if (isLoggedIn && profileStatus === 'idle') { 
             dispatch(fetchProfiles());
         }
-    }, [isLoggedIn, profileStatus, dispatch]); // Oder wenn sich profileStatus ändert 
+    }, [isLoggedIn, profileStatus, dispatch]); 
 
-    // Funktion um die im Formular eingetragenen Daten zu verarbeiten, je nachdem ob gerade editiert oder hinzugefügt wurde
     const handleSubmit = (formData) => {
         if (isEditing) {
-            dispatch(updateProfile({ ...formData, _id: isEditing._id })); // Übernimmt die geänderten Daten + die Id die man aus isEditing bekommt wenn man auf den Knopf drückt
+            dispatch(updateProfile({ ...formData, _id: isEditing._id })); 
         } else {
-            dispatch(addProfile(formData)); // Fügt Profile der Datenbank hinzu
+            dispatch(addProfile(formData)); 
         }
-        setIsEditing(null); // State zurücksetzen
+        setIsEditing(null); 
     };
 
-    // Funktion um state zurückzusetzen falls man auf "abbrechen drückt"
     const handleCancel = () => {
         setIsEditing(null);
     };
 
-    // Speichert das profile item in isEditing
     const handleEdit = (profile) => {
         setIsEditing(profile);
         scrollToSection("Form");
@@ -50,13 +45,11 @@ const Profile = () => {
         document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
     };
 
-    // Funktion um ein profile wieder zu löschen
     const handleDelete = (profile) => {
-        dispatch(deleteProfile(profile._id)); //löscht das explizite profile aus der Datenbank
+        dispatch(deleteProfile(profile._id)); 
         setIsEditing(null);
     }
 
-    // Tabelle dynamisch anzeigen lassen mithilfe des state aus dem slice
     let content;
     if (!isLoggedIn) {
         content = <p className="ErrorParagraph">Melde dich an um Profile zu erstellen</p>;

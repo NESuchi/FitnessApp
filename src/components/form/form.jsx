@@ -2,26 +2,24 @@ import styles from './Form.module.css';
 import { useState, useEffect } from "react";
 
 const Form = ({ schema, initialValues, onSubmit, onCancel, name }) => {
-    const [formData, setFormData] = useState(initialValues); //Initial Values aus den Configs
+    const [formData, setFormData] = useState(initialValues); 
 
     useEffect(() => {
         setFormData(initialValues);
     }, [initialValues]);
 
-    // Wird bei jeder Änderung in einem Feld des Formulars ausgelöst um Zustände zu handlen
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
-        // Zustände aktualisieren
         setFormData({
-            ...formData, // Alle bisherigen Objekte Kopieren, für Felder die nicht geändert zu erhalten
-            [name]: type === 'checkbox' ? checked : value, // Überprüfung auf checkbox
+            ...formData, 
+            [name]: type === 'checkbox' ? checked : value, 
         });
     };
-    // Ausführung wenn Formular gesendet wird
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        onSubmit(formData); // Ruft Funktion die über prop mitgegeben wurde auf und gibt formData weiter
-        setFormData(initialValues); // setzt das Formular au die Initialvalues zurück
+        onSubmit(formData); 
+        setFormData(initialValues); 
     }
 
     const handleCancel = () => {

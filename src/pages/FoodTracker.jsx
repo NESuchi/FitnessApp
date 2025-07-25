@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { foodFormSchema, foodTableColumns, foodInitialValues } from '../config/foodConfig';
 import { fetchFoods, addFood, updateFood, deleteFood } from '../reducer/slices/foodSlice'
 
-import Form from '../components/form/Form';
+import Form from '../components/form/form';
 import Table from '../components/table/Table';
 
 const FoodTracker = () => {
@@ -11,34 +11,29 @@ const FoodTracker = () => {
 
     const dispatch = useDispatch();
 
-    // Items, Status und Error aus dem slice holen
     const foods = useSelector((state) => state.food.items);
     const foodStatus = useSelector((state) => state.food.status);
     const foodError = useSelector((state) => state.food.error);
 
-    // foods aus der Datenbank holen 
     useEffect(() => {
-        if (foodStatus === 'idle') { // Aber nur wenn status auf idle ist, heißt noch nichts passiert ist -> verhindert immer neue Anfragen
+        if (foodStatus === 'idle') { 
             dispatch(fetchFoods());
         }
-    }, [foodStatus, dispatch]); // Oder wenn sich foodStatus ändert 
+    }, [foodStatus, dispatch]); 
 
-    // Funktion um die im Formular eingetragenen Daten zu verarbeiten, je nachdem ob gerade editiert oder hinzugefügt wurde
     const handleSubmit = (formData) => {
         if (isEditing) {
-            dispatch(updateFood({ ...formData, _id: isEditing._id })); // Übernimmt die geänderten Daten + die Id die man aus isEditing bekommt wenn man auf den Knopf drückt
+            dispatch(updateFood({ ...formData, _id: isEditing._id })); 
         } else {
-            dispatch(addFood(formData)); // Fügt food der Datenbank hinzu
+            dispatch(addFood(formData)); 
         }
-        setIsEditing(null); // State zurücksetzen
+        setIsEditing(null); 
     };
 
-    // Funktion um state zurückzusetzen falls man auf "abbrechen drückt"
     const handleCancel = () => {
         setIsEditing(null);
     };
 
-    // Speichert das food item in isEditing
     const handleEdit = (food) => {
         setIsEditing(food);
         scrollToSection("Form");
@@ -48,13 +43,11 @@ const FoodTracker = () => {
         document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
     };
 
-    // Funktion um ein food wieder zu löschen
     const handleDelete = (food) => {
-        dispatch(deleteFood(food._id)); //löscht das explizite food aus der Datenbank
+        dispatch(deleteFood(food._id)); 
         setIsEditing(null);
     }
 
-    // Tabelle dynamisch anzeigen lassen mithilfe des state aus dem slice
     let content;
     if (foodStatus === 'loading') {
         content = <p className="StandardParagraph">Lade Lebensmittel...</p>;

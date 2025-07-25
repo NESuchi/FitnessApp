@@ -1,4 +1,3 @@
-// Konfiguration für Profile in dem generischem Formular
 export const profileFormSchema = [
   { name: 'name', label: 'Name', type: 'text', required: true },
   { name: 'age', label: 'Alter', type: 'number', required: true },
@@ -17,7 +16,6 @@ export const profileFormSchema = [
   },
 ];
 
-// Konfiguration für Profile in der generischem Tabelle
 export const profileTableColumns = [
   { key: 'name', label: 'Name' },
   { key: 'age', label: 'Alter' },
@@ -25,7 +23,6 @@ export const profileTableColumns = [
   { key: 'weight', label: 'Gewicht (Kg)' },
 ]
 
-// Initialwerte für das Formular
 export const profileInitialValues = {
   name: '',
   age: '',

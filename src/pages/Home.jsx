@@ -1,4 +1,4 @@
-import Intro from '../components/intro/intro';
+import Intro from '../components/intro/Intro';
 import ImgA from '../assets/dummy.png';
 import ImgB from '../assets/dummy.png';
 import ImgC from '../assets/dummy.png';

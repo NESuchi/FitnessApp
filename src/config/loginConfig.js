@@ -1,16 +1,13 @@
-// Konfiguration für Login in dem generischem Formular´
 export const loginFormSchema = [
     { name: 'email', label: 'E-Mail', type: 'email', required: true },
     { name: 'password', label: 'Passwort', type: 'password', required: true}
 ];
 
-// Initialwerte für das Formular
 export const loginInitialValues = {
     email: '',
     password: '',
 };
 
-// Konfiguration für SignUp in dem generischem Formular´
 export const signupFormSchema = [
     { name: 'firstname', label: 'Vorname', type: 'text', required: true },
     { name: 'lastname', label: 'Nachname', type: 'text', required: true },
@@ -23,7 +20,6 @@ export const signupFormSchema = [
     { name: 'password', label: 'Passwort', type: 'password', required: true },
 ];
 
-// Initialwerte für das Formular
 export const signupInitialValues = {
     firstname: '',
     lastname: '',
