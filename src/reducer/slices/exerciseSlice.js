@@ -15,8 +15,8 @@ export const updateExercise = createAsyncThunk('/exercises/updateExercise', asyn
     const payload = { ...exerciseData, exerciseId: exerciseData._id };
     delete payload._id;
 
-    await axios.put('/fitness/exercise/', payload);
-    return exerciseData;
+    const res = await axios.put('/fitness/exercise/', payload);
+    return res.data;
 });
 
 export const deletExercise = createAsyncThunk('/exercises/deleteExercise', async (exerciseId) => {

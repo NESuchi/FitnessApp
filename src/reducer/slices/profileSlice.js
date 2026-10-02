@@ -15,8 +15,8 @@ export const updateProfile = createAsyncThunk('/profiles/updateProfile', async (
     const payload = { ...profileData, profileId: profileData._id };
     delete payload._id;
 
-    await axios.put('/fitness/profile/', payload);
-    return profileData;
+    const res = await axios.put('/fitness/profile/', payload);
+    return res.data;
 });
 
 export const deleteProfile = createAsyncThunk('/profiles/deleteProfile', async (profileId) => {

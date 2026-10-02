@@ -57,54 +57,48 @@ const DayTracker = ({ profile }) => {
         handleDayClick(new Date());
     }, [handleDayClick]);
 
-    const handleAddItem = (item, itemType, amount) => {
-        const actionCompleted = (action) => {
-            dispatch(action).then(() => {
-                dispatch(fetchAllDays(profile._id));
-                handleDayClick(date);
-            })
-        }
+    const handleAddItem = async (item, itemType, amount) => {
+        if (!profile) return;
 
         if (selectedDay) {
             const updatedDay = { ...selectedDay };
+
             if (itemType === 'food') {
-                updatedDay.food = [...updatedDay.food, { foodId: item._id, amount}];
+                updatedDay.food = [...updatedDay.food, { foodId: item._id, amount }];
             } else {
                 updatedDay.exercise = [...updatedDay.exercise, { exerciseId: item._id, timeInMinutes: amount }];
             }
-            actionCompleted(updateDay(updatedDay));
+
+            await dispatch(updateDay(updatedDay));
         } else {
             const newDayData = {
                 profileId: profile._id,
                 date: toLocalISOString(date),
                 food: itemType === 'food' ? [{ foodId: item._id, amount }] : [],
-                exercise: itemType === 'exercise' ? [{ exerciseId: item._id, timeInMinutes: amount}] : [],
+                exercise: itemType === 'exercise' ? [{ exerciseId: item._id, timeInMinutes: amount }] : [],
             };
-            actionCompleted(addDay(newDayData));
+
+            await dispatch(addDay(newDayData));
         }
     };
 
-    const handleRemoveItem = (subItemId, itemType) => {
+    const handleRemoveItem = async (subItemId, itemType) => {
         if (!selectedDay) return;
 
         const updatedDay = { ...selectedDay };
+
         if (itemType === 'food') {
             updatedDay.food = updatedDay.food.filter(f => f._id !== subItemId);
         } else {
             updatedDay.exercise = updatedDay.exercise.filter(e => e._id !== subItemId);
         }
-        
+
         const isEmpty = updatedDay.food.length === 0 && updatedDay.exercise.length === 0;
 
         if (isEmpty) {
-            dispatch(deleteDay(updatedDay._id)).then(() => {
-                dispatch(fetchAllDays(profile._id));
-                handleDayClick(date);
-            });
+            await dispatch(deleteDay(updatedDay._id));
         } else {
-            dispatch(updateDay(updatedDay)).then(() => {
-                dispatch(fetchAllDays(profile._id));
-            })
+            await dispatch(updateDay(updatedDay));
         }
     };
 

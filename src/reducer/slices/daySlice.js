@@ -20,8 +20,8 @@ export const updateDay = createAsyncThunk('days/updateDay', async (dayData) => {
     const payload = { ...dayData, dayId: dayData._id };
     delete payload._id;
 
-    await axios.put('/fitness/day/', payload);
-    return dayData;
+    const res = await axios.put('/fitness/day/', payload);
+    return res.data;
 });
 
 export const deleteDay = createAsyncThunk('days/deleteDay', async (dayId) => {
@@ -43,10 +43,15 @@ const daySlice = createSlice({
             .addCase(addDay.fulfilled, (state, action) => {
                 state.selectedDay = action.payload;
                 state.status = 'succeeded';
+                const idx = state.items.findIndex(d => d._id === action.payload._id);
+                if (idx === -1) state.items.push(action.payload);
             })
             .addCase(updateDay.fulfilled, (state, action) => {
                 state.selectedDay = action.payload;
                 state.status = 'succeeded';
+                const idx = state.items.findIndex(d => d._id === action.payload._id);
+                if (idx !== -1) state.items[idx] = action.payload;
+                else state.items.push(action.payload);
             })
             .addCase(deleteDay.fulfilled, (state, action) => {
                 state.items = state.items.filter(item => item._id !== action.payload);
